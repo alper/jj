@@ -65,22 +65,75 @@ pub(crate) struct NewArgs {
     #[arg(long, hide = true)]
     _edit: bool,
     /// Insert the new change after the given commit(s)
+    ///
+    /// Example: `jj new -A 1` creates a new change between `1` and its
+    /// children:
+    ///
+    /// ```text
+    ///                 2   3
+    ///                  \ /
+    ///     2   3   =>    @
+    ///      \ /          |
+    ///       1           1
+    /// ```
+    ///
+    /// Specifying `-A` multiple times will relocate all children of the given
+    /// commits.
+    ///
+    /// Example: `jj new -A 1 -A 3` creates a change with `1` and `3` as
+    /// parents, and rebases all children on top of the new change:
+    ///
+    /// ```text
+    ///                 2   4
+    ///                  \ /
+    ///     2  4   =>     @
+    ///     |  |         / \
+    ///     1  3        1   3
+    /// ```
     #[arg(
         long,
         short = 'A',
         visible_alias = "after",
         conflicts_with = "revisions",
         value_name = "REVSETS",
+        verbatim_doc_comment,
         add = ArgValueCandidates::new(complete::all_revisions),
     )]
     insert_after: Option<Vec<RevisionArg>>,
     /// Insert the new change before the given commit(s)
+    ///
+    /// Example: `jj new -B 3` creates a new change between `3` and its parents:
+    ///
+    /// ```text
+    ///                    3
+    ///                    |
+    ///       3     =>     @
+    ///      / \          / \
+    ///     1   2        1   2
+    /// ```
+    ///
+    /// `-A` and `-B` can be combined, which will limit which commits are
+    /// rebased.
+    ///
+    /// Example: `jj new -A 1 -B 2` creates a change between `1` and `2`,
+    /// but does not touch `3`:
+    ///
+    /// ```text
+    ///                  2
+    ///                  |
+    ///     2   3   =>   @   3
+    ///      \ /          \ /
+    ///       1            1
+    /// ```
+    ///
+    /// Just like with `-A`, it is also possible to specify `-B` multiple times.
     #[arg(
         long,
         short = 'B',
         visible_alias = "before",
         conflicts_with = "revisions",
         value_name = "REVSETS",
+        verbatim_doc_comment,
         add = ArgValueCandidates::new(complete::mutable_revisions),
     )]
     insert_before: Option<Vec<RevisionArg>>,
