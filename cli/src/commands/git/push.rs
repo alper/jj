@@ -226,9 +226,6 @@ pub fn cmd_git_push(
         &default_remote
     };
 
-    #[cfg(feature = "git2")]
-    print_git2_deprecation_warning(ui, workspace_command.settings())?;
-
     let mut tx = workspace_command.start_transaction();
     let view = tx.repo().view();
     let tx_description;

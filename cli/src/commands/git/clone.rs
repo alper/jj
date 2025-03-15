@@ -120,8 +120,6 @@ pub fn cmd_git_clone(
 
     let clone_result = (|| -> Result<_, CommandError> {
         let workspace_command = init_workspace(ui, command, &canonical_wc_path, args.colocate)?;
-        #[cfg(feature = "git2")]
-        print_git2_deprecation_warning(ui, workspace_command.settings())?;
         let mut workspace_command =
             configure_remote(ui, command, workspace_command, remote_name, &source)?;
         let default_branch = fetch_new_remote(ui, &mut workspace_command, remote_name, args.depth)?;

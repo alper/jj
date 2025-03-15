@@ -130,9 +130,6 @@ pub fn cmd_git_fetch(
         .map(|r| r.as_ref())
         .collect_vec();
 
-    #[cfg(feature = "git2")]
-    print_git2_deprecation_warning(ui, workspace_command.settings())?;
-
     let mut tx = workspace_command.start_transaction();
     do_git_fetch(ui, &mut tx, &remotes, &args.branch)?;
     tx.finish(
