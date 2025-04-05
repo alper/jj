@@ -150,7 +150,8 @@ fn test_new_wc_commit_when_wc_immutable() {
     insta::assert_snapshot!(output, @r"
     ------- stderr -------
     Moved 1 bookmarks to kkmpptxz a164195b main | (empty) a
-    Warning: The working-copy commit in workspace 'default' became immutable, so a new commit has been created on top of it.
+    Warning: The working-copy commit in workspace 'default' became immutable,
+    so a new commit has been created on top of it.
     Working copy  (@) now at: zsuskuln ef5fa85b (empty) (no description set)
     Parent commit (@-)      : kkmpptxz a164195b main | (empty) a
     [EOF]
@@ -169,7 +170,8 @@ fn test_immutable_heads_set_to_working_copy() {
     let output = work_dir.run_jj(["new", "-m=a"]);
     insta::assert_snapshot!(output, @r"
     ------- stderr -------
-    Warning: The working-copy commit in workspace 'default' became immutable, so a new commit has been created on top of it.
+    Warning: The working-copy commit in workspace 'default' became immutable,
+    so a new commit has been created on top of it.
     Working copy  (@) now at: pmmvwywv 7278b2d8 (empty) (no description set)
     Parent commit (@-)      : kkmpptxz a713ef56 (empty) a
     [EOF]
@@ -195,8 +197,10 @@ fn test_new_wc_commit_when_wc_immutable_multi_workspace() {
     insta::assert_snapshot!(output, @r"
     ------- stderr -------
     Moved 1 bookmarks to kkmpptxz 7796c4df main | (empty) a
-    Warning: The working-copy commit in workspace 'default' became immutable, so a new commit has been created on top of it.
-    Warning: The working-copy commit in workspace 'workspace1' became immutable, so a new commit has been created on top of it.
+    Warning: The working-copy commit in workspace 'default' became immutable,
+    so a new commit has been created on top of it.
+    Warning: The working-copy commit in workspace 'workspace1' became immutable,
+    so a new commit has been created on top of it.
     Working copy  (@) now at: royxmykx 896465c4 (empty) (no description set)
     Parent commit (@-)      : kkmpptxz 7796c4df main | (empty) a
     [EOF]

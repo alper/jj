@@ -560,7 +560,8 @@ fn test_color_ui_messages() {
     let output = work_dir.run_jj(["log", "@"]);
     insta::assert_snapshot!(output, @r#"
     ------- stderr -------
-    [1m[38;5;3mWarning: [39mThe argument "@" is being interpreted as a fileset expression. To specify a revset, pass -r "@" instead.[0m
+    [1m[38;5;3mWarning: [39mThe argument "@" is being interpreted as a fileset expression.[0m
+    [1m[39mTo specify a revset, pass -r "@" instead.[0m
     [EOF]
     "#);
 

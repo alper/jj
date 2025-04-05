@@ -321,7 +321,8 @@ fn test_squash_partial() {
     let output = work_dir.run_jj(["squash", "b"]);
     insta::assert_snapshot!(output, @r#"
     ------- stderr -------
-    Warning: The argument "b" is being interpreted as a fileset expression. To specify a revset, pass -r "b" instead.
+    Warning: The argument "b" is being interpreted as a fileset expression.
+    To specify a revset, pass -r "b" instead.
     Nothing changed.
     [EOF]
     "#);

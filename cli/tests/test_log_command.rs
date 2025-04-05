@@ -1053,7 +1053,9 @@ fn test_log_warn_path_might_be_revset() {
     ~
     [EOF]
     ------- stderr -------
-    Warning: The argument "." is being interpreted as a fileset expression, but this is often not useful because all non-empty commits touch '.'. If you meant to show the working copy commit, pass -r '@' instead.
+    Warning: The argument "." is being interpreted as a fileset expression,
+    but this is often not useful because all non-empty commits touch '.'.
+    If you meant to show the working copy commit, pass -r '@' instead.
     [EOF]
     "#);
 
@@ -1066,7 +1068,8 @@ fn test_log_warn_path_might_be_revset() {
     let output = work_dir.run_jj(["log", "@", "-T", "description"]);
     insta::assert_snapshot!(output, @r#"
     ------- stderr -------
-    Warning: The argument "@" is being interpreted as a fileset expression. To specify a revset, pass -r "@" instead.
+    Warning: The argument "@" is being interpreted as a fileset expression.
+    To specify a revset, pass -r "@" instead.
     [EOF]
     "#);
 
@@ -1074,7 +1077,8 @@ fn test_log_warn_path_might_be_revset() {
     let output = work_dir.run_jj(["log", "file2", "-T", "description"]);
     insta::assert_snapshot!(output, @r#"
     ------- stderr -------
-    Warning: The argument "file2" is being interpreted as a fileset expression. To specify a revset, pass -r "file2" instead.
+    Warning: The argument "file2" is being interpreted as a fileset expression.
+    To specify a revset, pass -r "file2" instead.
     [EOF]
     "#);
 

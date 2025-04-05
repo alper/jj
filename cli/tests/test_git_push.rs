@@ -1248,7 +1248,8 @@ fn test_git_push_changes_with_name_deleted_tracked(subprocess: bool) {
     insta::assert_snapshot!(output, @r"
     ------- stderr -------
     Error: Tracked remote bookmarks exist for deleted bookmark: b1
-    Hint: Use `jj bookmark set` to recreate the local bookmark. Run `jj bookmark untrack 'glob:b1@*'` to disassociate them.
+    Hint: Use `jj bookmark set` to recreate the local bookmark.
+    Run `jj bookmark untrack 'glob:b1@*'` to disassociate them.
     [EOF]
     [exit status: 1]
     ");
@@ -1258,7 +1259,8 @@ fn test_git_push_changes_with_name_deleted_tracked(subprocess: bool) {
     insta::assert_snapshot!(output, @r"
     ------- stderr -------
     Error: Tracked remote bookmarks exist for deleted bookmark: b1
-    Hint: Use `jj bookmark set` to recreate the local bookmark. Run `jj bookmark untrack 'glob:b1@*'` to disassociate them.
+    Hint: Use `jj bookmark set` to recreate the local bookmark.
+    Run `jj bookmark untrack 'glob:b1@*'` to disassociate them.
     [EOF]
     [exit status: 1]
     ");

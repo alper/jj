@@ -1493,7 +1493,8 @@ fn test_op_diff() {
     Changes to push to origin:
       Move forward bookmark bookmark-1 from 0dee631320b1 to fefb1e17c853
       Delete bookmark bookmark-2 from e1a239a57eb1
-    Warning: The working-copy commit in workspace 'default' became immutable, so a new commit has been created on top of it.
+    Warning: The working-copy commit in workspace 'default' became immutable,
+    so a new commit has been created on top of it.
     Working copy  (@) now at: oupztwtk fe3ad088 (empty) (no description set)
     Parent commit (@-)      : wvuyspvk fefb1e17 bookmark-1 | (empty) new commit
     [EOF]
@@ -2216,7 +2217,8 @@ fn test_op_show() {
     Changes to push to origin:
       Move forward bookmark bookmark-1 from 0dee631320b1 to 560df364f0a0
       Delete bookmark bookmark-2 from e1a239a57eb1
-    Warning: The working-copy commit in workspace 'default' became immutable, so a new commit has been created on top of it.
+    Warning: The working-copy commit in workspace 'default' became immutable,
+    so a new commit has been created on top of it.
     Working copy  (@) now at: pzsxstzt 91310b51 (empty) (no description set)
     Parent commit (@-)      : xznxytkn 560df364 bookmark-1 | (empty) new commit
     [EOF]

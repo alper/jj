@@ -336,7 +336,8 @@ fn test_bookmark_move() {
     insta::assert_snapshot!(output, @r"
     ------- stderr -------
     Error: Tracked remote bookmarks exist for deleted bookmark: foo
-    Hint: Use `jj bookmark set` to recreate the local bookmark. Run `jj bookmark untrack 'glob:foo@*'` to disassociate them.
+    Hint: Use `jj bookmark set` to recreate the local bookmark.
+    Run `jj bookmark untrack 'glob:foo@*'` to disassociate them.
     [EOF]
     [exit status: 1]
     ");
@@ -627,7 +628,10 @@ fn test_bookmark_rename() {
     insta::assert_snapshot!(output, @r"
     ------- stderr -------
     Warning: Tracked remote bookmarks for bookmark bremote were not renamed.
-    Hint: To rename the bookmark on the remote, you can `jj git push --bookmark bremote` first (to delete it on the remote), and then `jj git push --bookmark bremote2`. `jj git push --all` would also be sufficient.
+    Hint: To rename the bookmark on the remote, you can
+    `jj git push --bookmark bremote` first (to delete it on the remote), and then
+    `jj git push --bookmark bremote2`.
+    `jj git push --all --deleted` would also be sufficient.
     [EOF]
     ");
     let output = work_dir.run_jj(["bookmark", "rename", "bremote2", "bremote"]);
@@ -850,7 +854,8 @@ fn test_bookmark_delete_glob() {
     error: invalid value 'whatever:bookmark' for '<NAMES>...': Invalid string pattern kind `whatever:`
 
     For more information, try '--help'.
-    Hint: Try prefixing with one of `exact:`, `glob:`, `regex:`, `substring:`, or one of these with `-i` suffix added (e.g. `glob-i:`) for case-insensitive matching
+    Hint: Try prefixing with one of `exact:`, `glob:`, `regex:`, `substring:`,
+    or one of these with `-i` suffix added (e.g. `glob-i:`) for case-insensitive matching
     [EOF]
     [exit status: 2]
     ");
@@ -2268,7 +2273,8 @@ fn test_bookmark_create_with_default_target_revision() {
     let output = work_dir.run_jj(["bookmark", "create", "foo"]);
     insta::assert_snapshot!(output, @r"
     ------- stderr -------
-    Warning: Target revision was not specified, defaulting to the working copy (-r@). In the near future it will be required to explicitly specify target revision.
+    Warning: Target revision was not specified, defaulting to the working copy (-r@).
+    In the near future it will be required to explicitly specify target revision.
     Created 1 bookmarks pointing to qpvuntsm 230dd059 foo | (empty) (no description set)
     [EOF]
     ");
@@ -2283,7 +2289,8 @@ fn test_bookmark_set_with_default_target_revision() {
     let output = work_dir.run_jj(["bookmark", "set", "foo"]);
     insta::assert_snapshot!(output, @r"
     ------- stderr -------
-    Warning: Target revision was not specified, defaulting to the working copy (--revision=@). In the near future it will be required to explicitly specify target revision.
+    Warning: Target revision was not specified, defaulting to the working copy (--revision=@).
+    In the near future it will be required to explicitly specify target revision.
     Created 1 bookmarks pointing to qpvuntsm 230dd059 foo | (empty) (no description set)
     [EOF]
     ");
@@ -2313,7 +2320,8 @@ fn test_bookmark_move_with_default_target_revision() {
     let output = work_dir.run_jj(["bookmark", "move", "foo"]);
     insta::assert_snapshot!(output, @r"
     ------- stderr -------
-    Warning: Target revision was not specified, defaulting to the working copy (--to=@). In the near future it will be required to explicitly specify it.
+    Warning: Target revision was not specified, defaulting to the working copy (--to=@).
+    In the near future it will be required to explicitly specify it.
     Moved 1 bookmarks to zsuskuln 8bb159bc foo | (empty) (no description set)
     [EOF]
     ");

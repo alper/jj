@@ -821,7 +821,8 @@ fn test_workspaces_current_op_discarded_by_other(automatic: bool) {
         Parent commit (@-): rzvqmyuk 3df3bf89 (empty) (no description set)
         [EOF]
         ------- stderr -------
-        Failed to read working copy's current operation; attempting recovery. Error message from read attempt: Object 129f2dca870b954e2966fba35893bb47a5bc6358db6e8c4065cee91d2d49073efc3e055b9b81269a13c443d964abb18e83d25de73db2376ff434c876c59976ac of type operation not found
+        Failed to read working copy's current operation; attempting recovery.
+        Error message from read attempt: Object 129f2dca870b954e2966fba35893bb47a5bc6358db6e8c4065cee91d2d49073efc3e055b9b81269a13c443d964abb18e83d25de73db2376ff434c876c59976ac of type operation not found
         Created and checked out recovery commit 8ed0355c5d31
         [EOF]
         ");
@@ -839,7 +840,8 @@ fn test_workspaces_current_op_discarded_by_other(automatic: bool) {
         let output = secondary_dir.run_jj(["workspace", "update-stale"]);
         insta::assert_snapshot!(output, @r"
         ------- stderr -------
-        Failed to read working copy's current operation; attempting recovery. Error message from read attempt: Object 129f2dca870b954e2966fba35893bb47a5bc6358db6e8c4065cee91d2d49073efc3e055b9b81269a13c443d964abb18e83d25de73db2376ff434c876c59976ac of type operation not found
+        Failed to read working copy's current operation; attempting recovery.
+        Error message from read attempt: Object 129f2dca870b954e2966fba35893bb47a5bc6358db6e8c4065cee91d2d49073efc3e055b9b81269a13c443d964abb18e83d25de73db2376ff434c876c59976ac of type operation not found
         Created and checked out recovery commit 8ed0355c5d31
         [EOF]
         ");
