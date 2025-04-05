@@ -591,8 +591,8 @@ impl CommandHelper {
             Err(e @ OpStoreError::ObjectNotFound { .. }) => {
                 writeln!(
                     ui.status(),
-                    "Failed to read working copy's current operation; attempting recovery. Error \
-                     message from read attempt: {e}"
+                    "Failed to read working copy's current operation; attempting recovery.\n\
+                    Error message from read attempt: {e}"
                 )?;
 
                 let mut workspace_command = self.workspace_helper_no_snapshot(ui)?;
@@ -658,8 +658,7 @@ impl CommandHelper {
                         if num_rebased > 0 {
                             writeln!(
                                 ui.status(),
-                                "Rebased {num_rebased} descendant commits onto commits rewritten \
-                                 by other operation"
+                                "Rebased {num_rebased} descendant commits onto commits rewritten by other operation"
                             )?;
                         }
                     }
@@ -1898,56 +1897,56 @@ to the current parents may contain changes from multiple commits.
             .map_err(snapshot_command_error)?;
         let old_op_id = locked_ws.locked_wc().old_operation_id().clone();
 
-        let (repo, wc_commit) =
-            match WorkingCopyFreshness::check_stale(locked_ws.locked_wc(), &wc_commit, &repo) {
-                Ok(WorkingCopyFreshness::Fresh) => (repo, wc_commit),
-                Ok(WorkingCopyFreshness::Updated(wc_operation)) => {
-                    let repo = repo
-                        .reload_at(&wc_operation)
-                        .map_err(snapshot_command_error)?;
-                    let wc_commit = if let Some(wc_commit) = get_wc_commit(&repo)? {
-                        wc_commit
-                    } else {
-                        // The workspace has been deleted (see above)
-                        return Ok(SnapshotStats::default());
-                    };
-                    (repo, wc_commit)
-                }
-                Ok(WorkingCopyFreshness::WorkingCopyStale) => {
-                    return Err(SnapshotWorkingCopyError::StaleWorkingCopy(
-                        user_error_with_hint(
-                            format!(
-                                "The working copy is stale (not updated since operation {}).",
-                                short_operation_hash(&old_op_id)
-                            ),
-                            "Run `jj workspace update-stale` to update it.
-See https://jj-vcs.github.io/jj/latest/working-copy/#stale-working-copy \
-                             for more information.",
-                        ),
-                    ));
-                }
-                Ok(WorkingCopyFreshness::SiblingOperation) => {
-                    return Err(SnapshotWorkingCopyError::StaleWorkingCopy(internal_error(
+        let (repo, wc_commit) = match WorkingCopyFreshness::check_stale(
+            locked_ws.locked_wc(),
+            &wc_commit,
+            &repo,
+        ) {
+            Ok(WorkingCopyFreshness::Fresh) => (repo, wc_commit),
+            Ok(WorkingCopyFreshness::Updated(wc_operation)) => {
+                let repo = repo
+                    .reload_at(&wc_operation)
+                    .map_err(snapshot_command_error)?;
+                let wc_commit = if let Some(wc_commit) = get_wc_commit(&repo)? {
+                    wc_commit
+                } else {
+                    // The workspace has been deleted (see above)
+                    return Ok(SnapshotStats::default());
+                };
+                (repo, wc_commit)
+            }
+            Ok(WorkingCopyFreshness::WorkingCopyStale) => {
+                return Err(SnapshotWorkingCopyError::StaleWorkingCopy(
+                    user_error_with_hint(
                         format!(
-                            "The repo was loaded at operation {}, which seems to be a sibling of \
-                             the working copy's operation {}",
+                            "The working copy is stale (not updated since operation {}).",
+                            short_operation_hash(&old_op_id)
+                        ),
+                        "Run `jj workspace update-stale` to update it.\n\
+                        See https://jj-vcs.github.io/jj/latest/working-copy/#stale-working-copy for more information.",
+                    ),
+                ));
+            }
+            Ok(WorkingCopyFreshness::SiblingOperation) => {
+                return Err(SnapshotWorkingCopyError::StaleWorkingCopy(internal_error(
+                        format!(
+                            "The repo was loaded at operation {}, which seems to be a sibling of the working copy's operation {}",
                             short_operation_hash(repo.op_id()),
                             short_operation_hash(&old_op_id)
                         ),
                     )));
-                }
-                Err(OpStoreError::ObjectNotFound { .. }) => {
-                    return Err(SnapshotWorkingCopyError::StaleWorkingCopy(
-                        user_error_with_hint(
-                            "Could not read working copy's operation.",
-                            "Run `jj workspace update-stale` to recover.
-See https://jj-vcs.github.io/jj/latest/working-copy/#stale-working-copy \
-                             for more information.",
-                        ),
-                    ));
-                }
-                Err(e) => return Err(snapshot_command_error(e)),
-            };
+            }
+            Err(OpStoreError::ObjectNotFound { .. }) => {
+                return Err(SnapshotWorkingCopyError::StaleWorkingCopy(
+                    user_error_with_hint(
+                        "Could not read working copy's operation.",
+                        "Run `jj workspace update-stale` to recover.\n\
+                        See https://jj-vcs.github.io/jj/latest/working-copy/#stale-working-copy for more information.",
+                    ),
+                ));
+            }
+            Err(e) => return Err(snapshot_command_error(e)),
+        };
         self.user_repo = ReadonlyUserRepo::new(repo);
         let (new_tree_id, stats) = {
             let mut options = options;
@@ -2102,8 +2101,8 @@ See https://jj-vcs.github.io/jj/latest/working-copy/#stale-working-copy \
                 tx.repo_mut().check_out(name.clone(), &wc_commit)?;
                 writeln!(
                     ui.warning_default(),
-                    "The working-copy commit in workspace '{name}' became immutable, so a new \
-                     commit has been created on top of it.",
+                    "The working-copy commit in workspace '{name}' became immutable,\n\
+                    so a new commit has been created on top of it.",
                     name = name.as_symbol()
                 )?;
             }
@@ -2170,8 +2169,7 @@ See https://jj-vcs.github.io/jj/latest/working-copy/#stale-working-copy \
             };
             writeln!(
                 ui.warning_default(),
-                "{not_configured_msg} Until configured, your commits will be created with the \
-                 empty identity, and can't be pushed to remotes."
+                "{not_configured_msg} Until configured, your commits will be created with the empty identity, and can't be pushed to remotes."
             )?;
             writeln!(ui.hint_default(), "To configure, run:")?;
             if missing_user_name {
@@ -2538,8 +2536,7 @@ fn map_workspace_load_error(err: WorkspaceLoadError, user_wc_path: Option<&str>)
             if git_dir.is_dir() {
                 user_error_with_hint(
                     message,
-                    "It looks like this is a git repo. You can create a jj repo backed by it by \
-                     running this:
+                    "It looks like this is a git repo. You can create a jj repo backed by it by running this:
 jj git init --colocate",
                 )
             } else {
@@ -2743,8 +2740,7 @@ fn build_untracked_reason_message(reason: &UntrackedReason) -> Option<String> {
             let size_approx = HumanByteSize(*size);
             let max_size_approx = HumanByteSize(*max_size);
             Some(format!(
-                "{size_approx} ({size} bytes); the maximum size allowed is {max_size_approx} \
-                 ({max_size} bytes)",
+                "{size_approx} ({size} bytes); the maximum size allowed is {max_size_approx} ({max_size} bytes)",
             ))
         }
         // Paths with UntrackedReason::FileNotAutoTracked shouldn't be warned about
@@ -2824,8 +2820,7 @@ pub fn print_checkout_stats(
     if stats.skipped_files != 0 {
         writeln!(
             ui.warning_default(),
-            "{} of those updates were skipped because there were conflicting changes in the \
-             working copy.",
+            "{} of those updates were skipped because there were conflicting changes in the working copy.",
             stats.skipped_files
         )?;
         writeln!(
@@ -3183,8 +3178,7 @@ fn ensure_no_commit_loop(
     {
         let commit_id = commit_id?;
         return Err(user_error(format!(
-            "Refusing to create a loop: commit {} would be both an ancestor and a descendant of \
-             the {commit_type}",
+            "Refusing to create a loop: commit {} would be both an ancestor and a descendant of the {commit_type}",
             short_commit_hash(&commit_id),
         )));
     }
@@ -4026,8 +4020,7 @@ fn warn_if_args_mismatch(
     if new_string_args.as_deref() != Some(expected_args) {
         writeln!(
             ui.warning_default(),
-            "Command aliases cannot be loaded from -R/--repository path or --config/--config-file \
-             arguments."
+            "Command aliases cannot be loaded from -R/--repository path or --config/--config-file arguments."
         )?;
     }
     Ok(())

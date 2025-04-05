@@ -472,8 +472,7 @@ fn process_push_stats(push_stats: &GitPushStats) -> Result<(), CommandError> {
                 Ok(())
             });
             error.add_hint(
-                "Try fetching from the remote, then make the bookmark point to where you want it \
-                 to be, and push again.",
+                "Try fetching from the remote, then make the bookmark point to where you want it to be, and push again.",
             );
         }
         if !push_stats.remote_rejected.is_empty() {
@@ -787,8 +786,7 @@ fn classify_bookmark_update(
             Err(RejectedBookmarkUpdateReason {
                 message: format!("Refusing to create new remote bookmark {remote_symbol}"),
                 hint: Some(
-                    "Use --allow-new to push new bookmark. Use --remote to specify the remote to \
-                     push to."
+                    "Use --allow-new to push new bookmark. Use --remote to specify the remote to push to."
                         .to_owned(),
                 ),
             })
@@ -800,8 +798,7 @@ fn classify_bookmark_update(
                     name = remote_symbol.name.as_symbol(),
                 ),
                 hint: Some(
-                    "Push deleted bookmarks with --deleted or forget the bookmark to suppress \
-                     this warning."
+                    "Push deleted bookmarks with --deleted or forget the bookmark to suppress this warning."
                         .to_owned(),
                 ),
             })
@@ -828,8 +825,7 @@ fn create_explicitly_named_bookmarks(
     };
     if name_str.is_empty() || revision_str.is_empty() {
         return Err(cli_error(format!(
-            "Argument '{name_revision}' must have the form NAME=REVISION, with both NAME and \
-             REVISION non-empty"
+            "Argument '{name_revision}' must have the form NAME=REVISION, with both NAME and REVISION non-empty"
         ))
         .hinted(hint));
     }
@@ -845,8 +841,7 @@ fn create_explicitly_named_bookmarks(
         return Err(user_error_with_hint(
             format!("Bookmark already exists: {symbol}"),
             format!(
-                "Use 'jj bookmark move' to move it, and 'jj git push -b {symbol} [--allow-new]' \
-                 to push it"
+                "Use 'jj bookmark move' to move it, and 'jj git push -b {symbol} [--allow-new]' to push it"
             ),
         ));
     }
@@ -854,8 +849,8 @@ fn create_explicitly_named_bookmarks(
         return Err(user_error_with_hint(
             format!("Tracked remote bookmarks exist for deleted bookmark: {symbol}"),
             format!(
-                "Use `jj bookmark set` to recreate the local bookmark. Run `jj bookmark untrack \
-                 'glob:{symbol}@*'` to disassociate them."
+                "Use `jj bookmark set` to recreate the local bookmark.\n\
+                Run `jj bookmark untrack 'glob:{symbol}@*'` to disassociate them."
             ),
         ));
     }
@@ -962,8 +957,7 @@ fn find_bookmarks_targeted_by_revisions<'a>(
         if commit_ids.peek().is_none() {
             writeln!(
                 ui.warning_default(),
-                "No bookmarks found in the default push revset: \
-                 remote_bookmarks(remote={remote})..@",
+                "No bookmarks found in the default push revset: remote_bookmarks(remote={remote})..@",
                 remote = remote.as_symbol()
             )?;
         }

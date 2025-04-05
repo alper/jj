@@ -347,8 +347,7 @@ impl IndexStore for DefaultIndexStore {
                         expected_version,
                     } => {
                         eprintln!(
-                            "Found index format version {found_version}, expected version \
-                             {expected_version}. Reindexing..."
+                            "Found index format version {found_version}, expected version {expected_version}. Reindexing..."
                         );
                     }
                     ReadonlyIndexLoadError::Other { name: _, error } => {

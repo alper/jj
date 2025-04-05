@@ -1201,8 +1201,7 @@ impl Backend for GitBackend {
                 // commit and another commit.
                 if contents.parents.len() > 1 {
                     return Err(BackendError::Unsupported(
-                        "The Git backend does not support creating merge commits with the root \
-                         commit as one of the parents."
+                        "The Git backend does not support creating merge commits with the root commit as one of the parents."
                             .to_owned(),
                     ));
                 }

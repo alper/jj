@@ -113,8 +113,7 @@ pub(crate) fn cmd_simplify_parents(
         if simplified_commits > 0 {
             writeln!(
                 formatter,
-                "Removed {edges} edges from {simplified_commits} out of {num_orig_commits} \
-                 commits.",
+                "Removed {edges} edges from {simplified_commits} out of {num_orig_commits} commits.",
             )?;
             if reparented_descendants > 0 {
                 writeln!(

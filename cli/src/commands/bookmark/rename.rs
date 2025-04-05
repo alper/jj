@@ -88,9 +88,10 @@ pub fn cmd_bookmark_rename(
         )?;
         writeln!(
             ui.hint_default(),
-            "To rename the bookmark on the remote, you can `jj git push --bookmark \
-             {old_bookmark}` first (to delete it on the remote), and then `jj git push --bookmark \
-             {new_bookmark}`. `jj git push --all` would also be sufficient.",
+            "To rename the bookmark on the remote, you can\n\
+            `jj git push --bookmark {old_bookmark}` first (to delete it on the remote), and then\n\
+            `jj git push --bookmark {new_bookmark}`.\n\
+            `jj git push --all --deleted` would also be sufficient.",
             old_bookmark = old_bookmark.as_symbol(),
             new_bookmark = new_bookmark.as_symbol()
         )?;

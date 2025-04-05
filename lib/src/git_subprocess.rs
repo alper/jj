@@ -66,8 +66,7 @@ pub enum GitSubprocessError {
     #[error("Failed to wait for the git process")]
     Wait(std::io::Error),
     #[error(
-        "Git does not recognize required option: {0} (note: supported version is \
-         {MINIMUM_GIT_VERSION})"
+        "Git does not recognize required option: {0} (note: supported version is {MINIMUM_GIT_VERSION})"
     )]
     UnsupportedGitOption(String),
     #[error("Git process failed: {0}")]

@@ -1,7 +1,8 @@
 edition = "2021"
 max_width = 100
 wrap_comments = true
-format_strings = true
+# do not split string literals, preserving the ability to grep for log messages
+format_strings = false
 error_on_line_overflow = true
 group_imports = "StdExternalCrate"
 imports_granularity = "Item"

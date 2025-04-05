@@ -165,8 +165,7 @@ pub enum ExternalToolError {
     #[error("Tool exited with {exit_status} (run with --debug to see the exact invocation)")]
     ToolAborted { exit_status: ExitStatus },
     #[error(
-        "Tool exited with {exit_status}, but did not produce valid conflict markers (run with \
-         --debug to see the exact invocation)"
+        "Tool exited with {exit_status}, but did not produce valid conflict markers (run with --debug to see the exact invocation)"
     )]
     InvalidConflictMarkers { exit_status: ExitStatus },
     #[error("I/O error")]
@@ -281,8 +280,7 @@ fn run_mergetool_external_single_file(
     let new_file_ids = if editor.merge_tool_edits_conflict_markers || exit_status_implies_conflict {
         tracing::info!(
             ?exit_status_implies_conflict,
-            "jj is reparsing output for conflicts, `merge-tool-edits-conflict-markers = {}` in \
-             TOML config;",
+            "jj is reparsing output for conflicts, `merge-tool-edits-conflict-markers = {}` in TOML config;",
             editor.merge_tool_edits_conflict_markers
         );
         conflicts::update_from_content(

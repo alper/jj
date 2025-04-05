@@ -154,8 +154,7 @@ fn warn_user_redefined_builtin(
             if checked_mutability_builtins.contains(&name) {
                 writeln!(
                     ui.warning_default(),
-                    "Redefining `revset-aliases.{name}` is not recommended; redefine \
-                     `immutable_heads()` instead",
+                    "Redefining `revset-aliases.{name}` is not recommended; redefine `immutable_heads()` instead",
                 )?;
             }
         }
@@ -319,8 +318,7 @@ fn format_multiple_revisions_error(
             write_commits_summary(formatter)
         });
         cmd_err.add_hint(
-            "Some of these commits have the same change id. Abandon one of them with `jj abandon \
-             -r <REVISION>`.",
+            "Some of these commits have the same change id. Abandon one of them with `jj abandon -r <REVISION>`.",
         );
     } else if let Some(bookmark_name) = expression.as_symbol() {
         // Separate hint if there's a conflicted bookmark
@@ -333,8 +331,7 @@ fn format_multiple_revisions_error(
             write_commits_summary(formatter)
         });
         cmd_err.add_hint(format!(
-            "Set which revision the bookmark points to with `jj bookmark set {bookmark_name} -r \
-             <REVISION>`.",
+            "Set which revision the bookmark points to with `jj bookmark set {bookmark_name} -r <REVISION>`.",
         ));
     } else {
         cmd_err.add_formatted_hint_with(|formatter| {
@@ -346,8 +343,7 @@ fn format_multiple_revisions_error(
         });
         if should_hint_about_all_prefix {
             cmd_err.add_hint(format!(
-                "Prefix the expression with `all:` to allow any number of revisions (i.e. \
-                 `all:{revision_str}`)."
+                "Prefix the expression with `all:` to allow any number of revisions (i.e. `all:{revision_str}`)."
             ));
         }
     };

@@ -117,8 +117,8 @@ fn check_wc_author(
 fn warn_wc_author(ui: &Ui, user_name: &str, user_email: &str) -> io::Result<()> {
     Ok(writeln!(
         ui.warning_default(),
-        "This setting will only impact future commits.\nThe author of the working copy will stay \
-         \"{user_name} <{user_email}>\".\nTo change the working copy author, use \"jj describe \
-         --reset-author --no-edit\""
+        "This setting will only impact future commits.\n\
+        The author of the working copy will stay \"{user_name} <{user_email}>\".\n\
+        To change the working copy author, use \"jj describe --reset-author --no-edit\""
     )?)
 }

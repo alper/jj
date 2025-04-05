@@ -81,8 +81,7 @@ impl Direction {
                 String::from("The working copy parent(s) have no other descendants with conflicts")
             }
             (Direction::Next, false, false) => format!(
-                "No other descendant found {offset} commit(s) forward from the working copy \
-                 parent(s)",
+                "No other descendant found {offset} commit(s) forward from the working copy parent(s)",
             ),
             // The WC can never be an ancestor of the start_revset since start_revset is either
             // itself or it's parent.

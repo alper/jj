@@ -96,15 +96,13 @@ pub enum ConflictResolveError {
     #[error("Couldn't find any conflicts at {0:?} in this revision")]
     NotAConflict(RepoPathBuf),
     #[error(
-        "Only conflicts that involve normal files (not symlinks, not executable, etc.) are \
-         supported. Conflict summary for {0:?}:\n{1}"
+        "Only conflicts that involve normal files (not symlinks, not executable, etc.) are supported. Conflict summary for {0:?}:\n{1}"
     )]
     NotNormalFiles(RepoPathBuf, String),
     #[error("The conflict at {path:?} has {sides} sides. At most 2 sides are supported.")]
     ConflictTooComplicated { path: RepoPathBuf, sides: usize },
     #[error(
-        "The output file is either unchanged or empty after the editor quit (run with --debug to \
-         see the exact invocation)."
+        "The output file is either unchanged or empty after the editor quit (run with --debug to see the exact invocation)."
     )]
     EmptyOrUnchanged,
     #[error(transparent)]
@@ -196,8 +194,7 @@ fn editor_args_from_settings(
         let default_editor = BUILTIN_EDITOR_NAME;
         writeln!(
             ui.hint_default(),
-            "Using default editor '{default_editor}'; run `jj config set --user {key} :builtin` \
-             to disable this message."
+            "Using default editor '{default_editor}'; run `jj config set --user {key} :builtin` to disable this message."
         )
         .ok();
         Ok(default_editor.into())

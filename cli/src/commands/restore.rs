@@ -114,9 +114,9 @@ pub(crate) fn cmd_restore(
     let (from_commits, from_tree, to_commit);
     if args.revision.is_some() {
         return Err(user_error(
-            "`jj restore` does not have a `--revision`/`-r` option. If you'd like to modify\nthe \
-             *current* revision, use `--from`. If you'd like to modify a *different* \
-             revision,\nuse `--into` or `--changes-in`.",
+            "`jj restore` does not have a `--revision`/`-r` option. If you'd like to modify\n\
+            the *current* revision, use `--from`. If you'd like to modify a *different* revision,\n\
+            use `--into` or `--changes-in`.",
         ));
     }
     if args.from.is_some() || args.into.is_some() {

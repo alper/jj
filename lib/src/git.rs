@@ -208,8 +208,7 @@ impl<'a> RefToPush<'a> {
         let expected_location = *expected_locations
             .get(GitRefName::new(&refspec.destination))
             .expect(
-                "The refspecs and the expected locations were both constructed from the same \
-                 source of truth. This means the lookup should always work.",
+                "The refspecs and the expected locations were both constructed from the same source of truth. This means the lookup should always work.",
             );
 
         RefToPush {
@@ -2648,20 +2647,14 @@ fn git2_push_refs(
                     Ok(PushAllowReason::NormalMatch) => {}
                     Ok(PushAllowReason::UnexpectedNoop) => {
                         tracing::info!(
-                            "The push of {dst_refname:?} is unexpectedly a no-op, the remote \
-                             branch is already at {actual_remote_location:?}. We expected it to \
-                             be at {expected_remote_location:?}. We don't consider this an error.",
+                            "The push of {dst_refname:?} is unexpectedly a no-op, the remote branch is already at {actual_remote_location:?}. We expected it to be at {expected_remote_location:?}. We don't consider this an error.",
                         );
                     }
                     Ok(PushAllowReason::ExceptionalFastforward) => {
                         // TODO(ilyagr): We could consider printing a user-facing message at
                         // this point.
                         tracing::info!(
-                            "We allow the push of {dst_refname:?} to {local_location:?}, even \
-                             though it is unexpectedly at {actual_remote_location:?} on the \
-                             server rather than the expected {expected_remote_location:?}. The \
-                             desired location is a descendant of the actual location, and the \
-                             actual location is a descendant of the expected location.",
+                            "We allow the push of {dst_refname:?} to {local_location:?}, even though it is unexpectedly at {actual_remote_location:?} on the server rather than the expected {expected_remote_location:?}. The desired location is a descendant of the actual location, and the actual location is a descendant of the expected location.",
                         );
                     }
                     Err(()) => {
@@ -2671,9 +2664,7 @@ fn git2_push_refs(
                         // fetch`, and the resulting branch conflicts should contain
                         // all the information they need.
                         tracing::info!(
-                            "Cannot push {dst_refname:?} to {local_location:?}; it is at \
-                             unexpectedly at {actual_remote_location:?} on the server as opposed \
-                             to the expected {expected_remote_location:?}",
+                            "Cannot push {dst_refname:?} to {local_location:?}; it is at unexpectedly at {actual_remote_location:?} on the server as opposed to the expected {expected_remote_location:?}",
                         );
                         failed_push_negotiations.push(dst_refname.to_owned());
                     }

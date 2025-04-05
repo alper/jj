@@ -450,9 +450,7 @@ impl From<MergeToolConfigError> for CommandError {
                 user_error_with_hint(
                     err,
                     format!(
-                        "To use `{tool_name}` as a merge tool, the config \
-                         `merge-tools.{tool_name}.merge-args` must be defined (see docs for \
-                         details)"
+                        "To use `{tool_name}` as a merge tool, the config `merge-tools.{tool_name}.merge-args` must be defined (see docs for details)"
                     ),
                 )
             }
@@ -497,10 +495,9 @@ mod git {
             let hint = match &err {
                 GitImportError::MissingHeadTarget { .. }
                 | GitImportError::MissingRefAncestor { .. } => Some(
-                    "\
-Is this Git repository a partial clone (cloned with the --filter argument)?
-jj currently does not support partial clones. To use jj with this repository, try re-cloning with \
-                     the full repository contents."
+                    "Is this Git repository a partial clone (cloned with the --filter argument)?\n\
+                    jj currently does not support partial clones.\n\
+                    To use jj with this repository, try re-cloning with the full repository contents."
                         .to_string(),
                 ),
                 GitImportError::Backend(_) => None,
@@ -594,12 +591,11 @@ jj currently does not support partial clones. To use jj with this repository, tr
             let hint = if err.code() == git2::ErrorCode::Certificate
                 && std::env::var_os("HOME").is_none()
             {
-                "The HOME environment variable is not set, and might be required for Git to \
-                 successfully load certificates. Try setting it to the path of a directory that \
-                 contains a `.ssh` directory."
+                "The HOME environment variable is not set, and might be required for Git to successfully load certificates.\n\
+                Try setting it to the path of a directory that contains a `.ssh` directory."
             } else {
-                "Jujutsu uses libssh2, which doesn't respect ~/.ssh/config. Does `ssh -F \
-                 /dev/null` to the host work?"
+                "Jujutsu uses libssh2, which doesn't respect ~/.ssh/config.\n\
+                Does `ssh -F /dev/null` to the host work?"
             };
 
             user_error_with_hint(err, hint)
@@ -763,8 +759,7 @@ fn bookmark_name_parse_error_hint(err: &BookmarkNameParseError) -> Option<String
             "Looks like remote bookmark. Run `jj bookmark track {symbol}` to track it."
         )),
         _ => Some(
-            "See https://jj-vcs.github.io/jj/latest/revsets/ or use `jj help -k revsets` for how \
-             to quote symbols."
+            "See https://jj-vcs.github.io/jj/latest/revsets/ or use `jj help -k revsets` for how to quote symbols."
                 .into(),
         ),
     }
@@ -782,8 +777,7 @@ fn config_get_error_hint(err: &ConfigGetError) -> Option<String> {
 fn file_pattern_parse_error_hint(err: &FilePatternParseError) -> Option<String> {
     match err {
         FilePatternParseError::InvalidKind(_) => Some(String::from(
-            "See https://jj-vcs.github.io/jj/latest/filesets/#file-patterns or `jj help -k \
-             filesets` for valid prefixes.",
+            "See https://jj-vcs.github.io/jj/latest/filesets/#file-patterns or `jj help -k filesets` for valid prefixes.",
         )),
         // Suggest root:"<path>" if input can be parsed as repo-relative path
         FilePatternParseError::UiPath(UiPathParseError::Fs(e)) => {
@@ -799,8 +793,7 @@ fn file_pattern_parse_error_hint(err: &FilePatternParseError) -> Option<String> 
 fn fileset_parse_error_hint(err: &FilesetParseError) -> Option<String> {
     match err.kind() {
         FilesetParseErrorKind::SyntaxError => Some(String::from(
-            "See https://jj-vcs.github.io/jj/latest/filesets/ or use `jj help -k filesets` for \
-             filesets syntax and how to match file paths.",
+            "See https://jj-vcs.github.io/jj/latest/filesets/ or use `jj help -k filesets` for filesets syntax and how to match file paths.",
         )),
         FilesetParseErrorKind::NoSuchFunction {
             name: _,
@@ -833,8 +826,7 @@ fn revset_parse_error_hint(err: &RevsetParseError) -> Option<String> {
     let bottom_err = iter::successors(Some(err), |e| e.origin()).last().unwrap();
     match bottom_err.kind() {
         RevsetParseErrorKind::SyntaxError => Some(
-            "See https://jj-vcs.github.io/jj/latest/revsets/ or use `jj help -k revsets` for \
-             revsets syntax and how to quote symbols."
+            "See https://jj-vcs.github.io/jj/latest/revsets/ or use `jj help -k revsets` for revsets syntax and how to quote symbols."
                 .into(),
         ),
         RevsetParseErrorKind::NotPrefixOperator {
@@ -880,8 +872,8 @@ fn revset_resolution_error_hint(err: &RevsetResolutionError) -> Option<String> {
 fn string_pattern_parse_error_hint(err: &StringPatternParseError) -> Option<String> {
     match err {
         StringPatternParseError::InvalidKind(_) => Some(
-            "Try prefixing with one of `exact:`, `glob:`, `regex:`, `substring:`, or one of these \
-             with `-i` suffix added (e.g. `glob-i:`) for case-insensitive matching"
+            "Try prefixing with one of `exact:`, `glob:`, `regex:`, `substring:`,\n\
+            or one of these with `-i` suffix added (e.g. `glob-i:`) for case-insensitive matching"
                 .into(),
         ),
         StringPatternParseError::GlobPattern(_) | StringPatternParseError::Regex(_) => None,
@@ -928,8 +920,7 @@ fn try_handle_command_result(
             print_error(ui, "Config error: ", err, hints)?;
             writeln!(
                 ui.stderr_formatter().labeled("hint"),
-                "For help, see https://jj-vcs.github.io/jj/latest/config/ or use `jj help -k \
-                 config`."
+                "For help, see https://jj-vcs.github.io/jj/latest/config/ or use `jj help -k config`."
             )?;
             Ok(ExitCode::from(1))
         }

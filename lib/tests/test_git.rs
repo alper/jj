@@ -4111,8 +4111,7 @@ fn test_concurrent_read_write_commit() {
                     // unlikely, but possible if the git backend had strong negative object cache
                     // for example.
                     eprintln!(
-                        "reader {i} couldn't observe the following commits: \
-                         {pending_commit_ids:#?}"
+                        "reader {i} couldn't observe the following commits: {pending_commit_ids:#?}"
                     );
                 }
             });

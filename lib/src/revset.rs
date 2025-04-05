@@ -1868,8 +1868,7 @@ impl SymbolResolver for FailingSymbolResolver {
     ) -> Result<Vec<CommitId>, RevsetResolutionError> {
         Err(RevsetResolutionError::NoSuchRevision {
             name: format!(
-                "Won't resolve symbol {symbol:?}. When creating revsets programmatically, avoid \
-                 using RevsetExpression::symbol(); use RevsetExpression::commits() instead."
+                "Won't resolve symbol {symbol:?}. When creating revsets programmatically, avoid using RevsetExpression::symbol(); use RevsetExpression::commits() instead."
             ),
             candidates: Default::default(),
         })

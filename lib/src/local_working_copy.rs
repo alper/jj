@@ -1086,8 +1086,7 @@ impl TreeState {
             FsmonitorSettings::Watchman(_) => {
                 return Err(SnapshotError::Other {
                     message: "Failed to query the filesystem monitor".to_string(),
-                    err: "Cannot query Watchman because jj was not compiled with the `watchman` \
-                          feature (consider disabling `core.fsmonitor`)"
+                    err: "Cannot query Watchman because jj was not compiled with the `watchman` feature (consider disabling `core.fsmonitor`)"
                         .into(),
                 });
             }

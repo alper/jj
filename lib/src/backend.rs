@@ -207,8 +207,7 @@ pub struct BackendLoadError(pub Box<dyn std::error::Error + Send + Sync>);
 #[derive(Debug, Error)]
 pub enum BackendError {
     #[error(
-        "Invalid hash length for object of type {object_type} (expected {expected} bytes, got \
-         {actual} bytes): {hash}"
+        "Invalid hash length for object of type {object_type} (expected {expected} bytes, got {actual} bytes): {hash}"
     )]
     InvalidHashLength {
         expected: usize,

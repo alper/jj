@@ -189,8 +189,7 @@ pub(crate) fn cmd_status(
         }
         writeln!(
             formatter.labeled("hint").with_heading("Hint: "),
-            "Use `jj bookmark list` to see details. Use `jj bookmark set <name> -r <rev>` to \
-             resolve."
+            "Use `jj bookmark list` to see details. Use `jj bookmark set <name> -r <rev>` to resolve."
         )?;
     }
     if !conflicted_remote_bookmarks.is_empty() {

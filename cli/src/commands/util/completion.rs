@@ -65,8 +65,7 @@ pub fn cmd_util_completion(
     let warn = |shell| -> std::io::Result<()> {
         writeln!(
             ui.warning_default(),
-            "`jj util completion --{shell}` will be removed in a future version, and this will be \
-             a hard error"
+            "`jj util completion --{shell}` will be removed in a future version, and this will be a hard error"
         )?;
         writeln!(
             ui.hint_default(),

@@ -66,8 +66,8 @@ pub fn cmd_bookmark_set(
     if args.revision.is_none() {
         writeln!(
             ui.warning_default(),
-            "Target revision was not specified, defaulting to the working copy (--revision=@). In \
-             the near future it will be required to explicitly specify target revision."
+            "Target revision was not specified, defaulting to the working copy (--revision=@).\n\
+            In the near future it will be required to explicitly specify target revision."
         )?;
     }
     let target_commit = workspace_command

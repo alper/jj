@@ -91,8 +91,8 @@ pub fn cmd_bookmark_move(
     if args.to.is_none() {
         writeln!(
             ui.warning_default(),
-            "Target revision was not specified, defaulting to the working copy (--to=@). In the \
-             near future it will be required to explicitly specify it."
+            "Target revision was not specified, defaulting to the working copy (--to=@).\n\
+            In the near future it will be required to explicitly specify it."
         )?;
     }
     let target_commit =

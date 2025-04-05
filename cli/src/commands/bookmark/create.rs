@@ -59,8 +59,8 @@ pub fn cmd_bookmark_create(
     if args.revision.is_none() {
         writeln!(
             ui.warning_default(),
-            "Target revision was not specified, defaulting to the working copy (-r@). In the near \
-             future it will be required to explicitly specify target revision."
+            "Target revision was not specified, defaulting to the working copy (-r@).\n\
+            In the near future it will be required to explicitly specify target revision."
         )?;
     }
     let target_commit = workspace_command
@@ -81,8 +81,8 @@ pub fn cmd_bookmark_create(
                     name = name.as_symbol()
                 ),
                 format!(
-                    "Use `jj bookmark set` to recreate the local bookmark. Run `jj bookmark \
-                     untrack 'glob:{name}@*'` to disassociate them.",
+                    "Use `jj bookmark set` to recreate the local bookmark.\n\
+                    Run `jj bookmark untrack 'glob:{name}@*'` to disassociate them.",
                     name = name.as_symbol()
                 ),
             ));

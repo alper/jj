@@ -207,8 +207,7 @@ pub(crate) fn cmd_describe(
             } = edit_multiple_descriptions(ui, &text_editor, &tx, &temp_commits)?;
             if !missing.is_empty() {
                 return Err(user_error(format!(
-                    "The description for the following commits were not found in the edited \
-                     message: {}",
+                    "The description for the following commits were not found in the edited message: {}",
                     missing.join(", ")
                 )));
             }
@@ -220,8 +219,7 @@ pub(crate) fn cmd_describe(
             }
             if !unexpected.is_empty() {
                 return Err(user_error(format!(
-                    "The following commits were not being edited, but were found in the edited \
-                     message: {}",
+                    "The following commits were not being edited, but were found in the edited message: {}",
                     unexpected.join(", ")
                 )));
             }

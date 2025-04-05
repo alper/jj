@@ -142,8 +142,7 @@ pub(crate) fn cmd_abandon(
             if args.restore_descendants {
                 writeln!(
                     formatter,
-                    "Rebased {num_rebased} descendant commits (while preserving their content) \
-                     onto parents of abandoned commits",
+                    "Rebased {num_rebased} descendant commits (while preserving their content) onto parents of abandoned commits",
                 )?;
             } else {
                 writeln!(
@@ -173,8 +172,7 @@ pub(crate) fn cmd_abandon(
         {
             writeln!(
                 ui.warning_default(),
-                "Remote bookmarks tracked by deleted bookmarks will be deleted on the next `jj \
-                 git push`."
+                "Remote bookmarks tracked by deleted bookmarks will be deleted on the next `jj git push`."
             )?;
         }
     }
